@@ -17,5 +17,19 @@ public class Location {
         this.col = col;
 
     }
+    
+    @Override
+    public String toString() {
+    return "Row: " + this.row + "\nColumn: " + this.col;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+    Location location = (Location) obj;
+    if(this.row == location.row && this.col == location.col){
+        return true;
+    }
+    return false;
+    }
 
 }
