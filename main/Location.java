@@ -1,6 +1,13 @@
 package PegGame.main;
 
 public class Location {
+
+    //Location constructor
+    public Location(int row, int col){            
+        this.row = row;
+        this.col = col;
+    }
+    
     //private attributes
     private int row;
     private int col;
@@ -14,11 +21,6 @@ public class Location {
         return col;
     }
     
-    //Location constructor
-    public Location(int row, int col){
-        this.row = row;
-        this.col = col;
-    }
     
     @Override
     public String toString() {
