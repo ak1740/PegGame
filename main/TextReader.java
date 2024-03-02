@@ -31,4 +31,8 @@ public class TextReader {
         }
         return null;
     }
+    public static char[][] getBoard() {
+        return readArrayFromFile("board.txt");
+    }
+
 }

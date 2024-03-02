@@ -1,3 +1,6 @@
+/* Move Class 
+ * Aliya, Leen, Mariam, Zoya
+*/
 package PegGame.main;
 
 public class Move{
@@ -5,6 +8,7 @@ public class Move{
     private Location from;
     private Location to;
 
+    //constructor
     public Move(Location from, Location to) {
         this.from = from;
         this.to = to;
@@ -20,4 +24,4 @@ public class Move{
     public String toString() {
         return "Move from " + from + " to " + to;
     }
-}    
+}
