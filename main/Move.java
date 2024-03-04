@@ -20,7 +20,7 @@ public class Move{
     public Location getTo(){
         return to;
     }
-    
+    // to string to print the move
     public String toString() {
         return "Move from " + from + " to " + to;
     }
