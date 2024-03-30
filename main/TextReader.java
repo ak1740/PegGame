@@ -59,4 +59,8 @@ public class TextReader {
         return board;
     }
  
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c7b41a252e30af32857b969cb287b9ad3c91a6dd
