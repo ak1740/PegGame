@@ -1,41 +1,63 @@
 package PegGame.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import org.junit.Test;
 
 import PegGame.main.TextReader;
+import week1.Testable;
 
+@Testable
 public class TextReaderTest {
 
     @Test
-    public void testReadArrayFromFile() {
-        char[][] array = TextReader.readArrayFromFile("test_board.txt");
+    void testValidFileReading() {
+        String input = "3\n" +   // Size of the board
+                       "o..\n" + // Row 1
+                       ".o.\n" + // Row 2
+                       "..o";   // Row 3
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
 
-        // Assert that the returned array is not null
-        assertNotNull(array);
+        char[][] expectedBoard = {
+                {'o', '.', '.'},
+                {'.', 'o', '.'},
+                {'.', '.', 'o'}
+        };
 
-        // Assert that the array has the expected size
-        assertEquals(4, array.length);
-        assertEquals(4, array[0].length);
+        char[][] actualBoard = TextReader.readArrayFromFile("testFile.txt");
 
-        // Add more specific assertions if needed
+        assertArrayEquals(expectedBoard, actualBoard);
     }
 
     @Test
-    public void testGetBoard() {
-        char[][] array = TextReader.getBoard();
+    void testInvalidCharacter() {
+        String input = "2\n" +   // Size of the board
+                       "o..\n" + // Row 1
+                       ".x.\n";  // Invalid character 'x'
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
 
-        // Assert that the returned array is not null
-        assertNotNull(array);
-
-        // Assert that the array has the expected size
-        assertEquals(4, array.length);
-        assertEquals(4, array[0].length);
-
-        // Add more specific assertions if needed
+        assertNull(TextReader.readArrayFromFile("testFile.txt"));
     }
 
-    // Add more test methods as needed
+    @Test
+    void testIOException() {
+        // Testing IOException by providing a non-existent file name
+        assertNull(TextReader.readArrayFromFile("nonexistent.txt"));
+    }
+
+    @Test
+    void testNumberFormatException() {
+        String input = "abc\n" + // Invalid size
+                       "o..\n"; // Row 1
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+
+        assertNull(TextReader.readArrayFromFile("testFile.txt"));
+    }
 }

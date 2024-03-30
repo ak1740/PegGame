@@ -2,11 +2,11 @@
  * NOT PLAYABLE
  * Aliya, Leen, Mariam, Zoya
  */
-
+ 
  package PegGame.main;
-
- import java.util.ArrayList;
- import java.util.Collection;
+ 
+ import java.util.ArrayList;// Import for managing ArrayList data structure
+ import java.util.Collection;// Import for working with collections of moves
  
  
  public class StepFour implements PegGame {
@@ -30,13 +30,13 @@
                  }
              }
          }
-     
+ 
          // Now, just call getPossibleMoves() once since it checks the entire board
          Collection<Move> possibleMoves = getPossibleMoves(); // Updated line
          if (!possibleMoves.isEmpty()) {
              hasMoves = true;
          }
-     
+     // determine the game state based on peg count and available moves
          if (pegCount == 0) {
              return GameState.NOT_STARTED; 
          } else if (!hasMoves) {
@@ -49,7 +49,7 @@
              return GameState.IN_PROGRESS;
          }
      }
-     
+ 
  
      // Method to make a move 
      @Override
@@ -58,9 +58,8 @@
          Location to = move.getTo();
  
          // Make the move on the board
-         char peg = board[from.getRow()][to.getCol()];
          board[from.getRow()][from.getCol()] = '.';
-         board[to.getRow()][to.getCol()] = peg;
+         board[to.getRow()][to.getCol()] = 'o';
  
          // Jump and remove the peg in between
          int jumpedRow = (from.getRow() + to.getRow()) / 2;
@@ -86,8 +85,8 @@
          Collection<Move> possibleMoves = new ArrayList<>();
  
          // Check for the specified pattern in rows
-         for (int row = 0; row < board.length; row++) {
-             for (int col = 0; col < board[row].length - 2; col++) {
+         for (int row = 0; row < board.length; row++) {// Loop through each row in the board
+             for (int col = 0; col < board[row].length - 2; col++) {// Loop through each column in the current row ...excluding the last two columns
                  if (board[row][col] == 'o' && board[row][col + 1] == 'o' && board[row][col + 2] == '.') {
                      possibleMoves.add(new Move(new Location(row, col), new Location(row, col + 2)));
                  } else if (board[row][col] == '.' && board[row][col + 1] == 'o' && board[row][col + 2] == 'o') {
@@ -98,11 +97,11 @@
  
          // Check for the specified pattern in columns
          for (int row = 0; row < board.length - 2; row++) {
-             for (int col = 0; col < board[row].length; col++) {
-                 if (board[row][col] == 'o' && board[row + 1][col] == 'o' && board[row + 2][col] == '.') {
-                     possibleMoves.add(new Move(new Location(row, col), new Location(row + 2, col)));
-                 } else if (board[row][col] == '.' && board[row + 1][col] == 'o' && board[row + 2][col] == 'o') {
-                     possibleMoves.add(new Move(new Location(row + 2, col), new Location(row, col)));
+             for (int col = 0; col < board[row].length; col++) { // Loop through each column in the current row
+                 if (board[row][col] == 'o' && board[row + 1][col] == 'o' && board[row + 2][col] == '.') { // check if there is a peg ('o') in the current cell and two consecutive pegs below it with an empty hole ('.')
+                     possibleMoves.add(new Move(new Location(row, col), new Location(row + 2, col)));// If the pattern is found it will add a move representing a jump from the current cell to the empty hole
+                 } else if (board[row][col] == '.' && board[row + 1][col] == 'o' && board[row + 2][col] == 'o') {// Check if there is an empty hole in the current cell and two consecutive pegs below it
+                     possibleMoves.add(new Move(new Location(row + 2, col), new Location(row, col)));// if the pattern is found then add a move representing a jump from the two pegs to the empty hole
                  }
              }
          }
@@ -133,13 +132,13 @@
          char[][] sampleBoard = {
              {'o','o','o','.'},{'o','o','o','o'},{'o','o','o','o'},{'o','o','o','o'}
          };
-     
+ 
          // Initialize your game board or game class here
          StepFour game = new StepFour(sampleBoard); 
  
          GameState gameState = game.getGameState();
          System.out.println("Game State: " + gameState);
-     
+ 
          // Fetch and print possible moves
          System.out.println("Possible Moves:");
          Collection<Move> possibleMoves = game.getPossibleMoves();
@@ -154,7 +153,7 @@
              System.out.println();
          }
  
- 
+         // Perform a move
          Move move = new Move(new Location(2, 3), new Location(0, 3));
          System.out.println("\nMaking move: " + move);
          game.makeMove(move);
@@ -167,18 +166,19 @@
              }
              System.out.println();
          }
- 
+     // Print possible moves after the first move
          System.out.println("Possible Moves:");
          Collection<Move> possibleMoves1 = game.getPossibleMoves();
          for (Move move1 : possibleMoves1) {
              System.out.println(move1);
          } 
  
+    // Perform another move
          Move move2 = new Move(new Location(1, 1), new Location(1, 3));
          System.out.println("\nMaking move: " + move2);
          game.makeMove(move2);
  
-         // Print the updated board
+         // prints the updated board 
          System.out.println("\nUpdated Board:");
          for (char[] row : game.board) {
              for (char cell : row) {
@@ -186,18 +186,18 @@
              }
              System.out.println();
          }
- 
+  // Print possible moves after the second move
          System.out.println("Possible Moves:");
          Collection<Move> possibleMoves2 = game.getPossibleMoves();
          for (Move move3 : possibleMoves2) {
              System.out.println(move3);
          } 
- 
+         // Perform another move
          Move move3 = new Move(new Location(2, 1), new Location(2, 3));
          System.out.println("\nMaking move: " + move3);
          game.makeMove(move3); 
  
-          // Print the updated board
+          // Print the updated board after the third move
           System.out.println("\nUpdated Board:");
           for (char[] row : game.board) {
               for (char cell : row) {
@@ -205,15 +205,14 @@
               }
               System.out.println();
           }
-  
+        // Print possible moves after the third move
           System.out.println("Possible Moves:");
           Collection<Move> possibleMoves3 = game.getPossibleMoves();
           for (Move move4 : possibleMoves3) {
               System.out.println(move4);
           } 
- 
+        // Get and print the final game state
           GameState gameState2 = game.getGameState();
          System.out.println("Game State: " + gameState2);
      }
  }
-     

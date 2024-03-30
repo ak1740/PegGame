@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import PegGame.main.Location;
 import PegGame.main.Move;
+import week1.Testable;
 
+@Testable
 public class MoveTest {
 
     @Test

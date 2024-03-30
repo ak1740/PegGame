@@ -11,7 +11,9 @@ import PegGame.main.Location;
 import PegGame.main.Move;
 import PegGame.main.PegGameException;
 import PegGame.main.StepFour;
+import week1.Testable;
 
+@Testable
 public class StepFourTest {
 
     @Test
@@ -78,10 +80,6 @@ public class StepFourTest {
 
         // Make the move
         game.makeMove(move);
-
-        // Add assertions to verify the state of the game after making the move
-        // Example: assertEquals(expectedGameState, game.getGameState());
     }
 
-    // Add more test methods as needed
 }

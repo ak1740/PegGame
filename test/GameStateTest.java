@@ -3,12 +3,14 @@ package PegGame.test;
 import org.junit.Test;
 
 import PegGame.main.GameState;
+import week1.Testable;
 
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Testable
 public class GameStateTest {
 
 @Test

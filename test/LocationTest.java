@@ -5,7 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import PegGame.main.Location;
-
+import week1.Testable;
+@Testable
 public class LocationTest {
 
     @Test
